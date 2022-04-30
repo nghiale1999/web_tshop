@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\admin\AdController;
+use App\Http\Controllers\admin\ContronllerKhuyenmai;
 use App\Http\Controllers\member\GiohangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\member\MemberController;
 use App\Http\Controllers\member\HomeController;
+use App\Http\Controllers\member\LichsuController;
 use PhpParser\Node\Name;
 use App\Http\Controllers\member\SanphamController;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +54,7 @@ Route::group([
         Route::match(['get', 'post'], '/giohang', [GiohangController::class, 'gioHang']);
         Route::post('/themgiohang','GiohangController@themGioHang');
         Route::post('/themgiohangct','GiohangController@themGioHangct');
-        Route::post('/danhgiasao','SanphamController@danhGiaSao');
+        Route::post('/danhgia sao','SanphamController@danhGiaSao');
         Route::post('/xoagiohang','GiohangController@xoaGioHang');
         Route::post('/giamgiohang','GiohangController@giamGiohang');
         Route::post('/tanggiohang','GiohangController@tangGioHang');
@@ -61,7 +63,11 @@ Route::group([
         Route::get('/lichsu','LichsuController@lichSu');
         Route::get('/chitiet-lichsu/{id}','LichsuController@chiTietLichSu');
         Route::match(['get', 'post'], '/thongtincanhan', [MemberController::class, 'thongTinCaNhan']);
-        
+        Route::match(['get', 'post'], '/hotro', [HomeController::class, 'hoTro']);
+        Route::match(['get', 'post'], '/quanlydonhang', [LichsuController::class, 'donHang']);
+        Route::post('/guihang','LichsuController@guiHang');
+        Route::post('/nhanhang','LichsuController@nhanHang');
+
 
     });
 
@@ -126,8 +132,9 @@ Route::group([
         Route::get('/quanlyuser/hotro/{id}','ControllerQuanlyuser@GetHotro');
         Route::post('/quanlyuser/hotro/{id}','ControllerQuanlyuser@PostHotro');
         Route::post('/logout','ControllerQuanlyuser@logout');
-
-
+   
+   
+        Route::match(['get', 'post'], '/khuyenmai', [ContronllerKhuyenmai::class, 'khuyenMai']);
+        Route::get('/bokhuyenmai/{id}','ContronllerKhuyenmai@boKhuyenMai');
         
-
     });
