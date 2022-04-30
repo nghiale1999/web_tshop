@@ -43,6 +43,12 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('admin/khuyenmai')}}" aria-expanded="false">
+                        <i class="mdi mdi-file"></i>
+                        <span class="hide-menu">Quản Trị Khuyến mãi</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link"  aria-expanded="false">
                         <i class="mdi mdi-face"></i>
                         <span class="hide-menu"><form lass="hide-menu" method="POST" action="{{ route('logout') }}">

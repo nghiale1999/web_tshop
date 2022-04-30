@@ -9,6 +9,7 @@ use App\ModelBaiviet;
 use App\ModelBinhluan;
 use App\ModelDgsao;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -52,6 +53,34 @@ class HomeController extends Controller
 
     }
     
-
+    public function hoTro(Request $request){
+        if($request->isMethod('post')){
+            $validatedData = $request->validate([
+                'tieude'=>['required'],
+                'noidung'=>['required'],
+               
+            ],[    
+                'tieude.required' => 'Tiêu đề không được bỏ trống',
+                'noidung.required' => 'Nội dung không được bỏ trống',
+            ]);
+            $title = $request->tieude;
+            $content = $request->noidung;
+            $mailfrom = Auth::user()->email;
+            $mailname = Auth::user()->name;
+            $mail = [
+                'tieude'=>$title,
+                'noidung'=>$content,
+                'ten'=>$mailname,
+                'mail'=>$mailfrom,
+            ];
+            Mail::send('mail',$mail,function($mail) use($request){
+                $mail->from(Auth::user()->email, Auth::user()->name);
+                $mail->to('lenghiamailtest@gmail.com', 'admin');
+                $mail->subject($request->tieude);
+            });
+            return redirect()->back()->with('success', 'Gửi yêu cầu thành công');
+        }
+        return view('member.hotro');
+    }
     
 }

@@ -141,13 +141,12 @@ class AdController extends Controller
     public function PostDoimatkhau(Request $request){
         $data = User::all();
         $validatedData = $request->validate([
-            'email'=>['required', 'email','unique:users,email'],
+            'email'=>['required', 'email'],
             'password'=>['required', 'min:8'],
             'passwordcf' => ['required', 'same:password'],
         ],[    
             'email.required' => 'Email không được bỏ trống',
             'email.email' => 'Email không đúng định dạng',
-            'email.unique' => 'Email đã được đăng ký',
             'password.required' => 'Mật khẩu không được bỏ trống',
             'password.min' => 'Mật hàng ít nhất 8 ký tự',
             'passwordcf.required' => 'Mật khẩu xác nhận không được bỏ trống',
@@ -159,9 +158,9 @@ class AdController extends Controller
                 $user = User::findOrfail($value->id);
                 $user->password = bcrypt($request->password);
                 if($user->save()){
-                    return redirect()->back()->with('success','Khóa người dùng thành công');
+                    return redirect()->back()->with('success','Đổi mật khẩu thành công');
                 }else{
-                    return redirect()->back()->withErrors('Khóa người dùng thất bại');  
+                    return redirect()->back()->withErrors('Đổi mật khẩu thất bại');  
                 }
             }
             

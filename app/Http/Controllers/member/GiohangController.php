@@ -158,6 +158,8 @@ class GiohangController extends Controller
                         $ls->diachi = $request->diachi;
                         $ls->email = $request->email;
                         $ls->sdt = $request->sdt;
+                        $ls->id_sp = $key;
+                        $ls->trangthai = 'Đợi';
                         $ls->save();
                         $a = $data['soluong'] - $value['soluong'];
                         DB::table('sanpham')->where('id', $key)->update(['soluong' => $a]);
@@ -172,6 +174,8 @@ class GiohangController extends Controller
                         $ls->diachi = $request->diachi;
                         $ls->email = $request->email;
                         $ls->sdt = $request->sdt;
+                        $ls->id_sp = $key;
+                        $ls->trangthai = 'Đợi';
                         $ls->save();
                         DB::table('sanpham')->where('id', $key)->delete();
                         $SS = Arr::except($SS, [$key]);

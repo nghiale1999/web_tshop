@@ -15,10 +15,11 @@
                 <tbody>
                     @foreach ($data as $ls)
                        <tr> 
-                        <td>{{$ls->tensp}}</td>
-                        <td>{{$ls->soluong}}</td>
-                        <td>{{$ls->gia}}đ</td>
-                    </tr> 
+                            <td>{{$ls->tensp}}</td>
+                            <td>{{$ls->soluong}}</td>
+                            <td>{{$ls->gia}}đ</td>
+                        </tr> 
+                        
                     @endforeach
                     
                 </tbody>
@@ -43,11 +44,41 @@
                 <p>Số Điện Thoại</p>
                 <input type="text" value="{{$ls->sdt}}">    
             </div>
+            @if ($ls->trangthai == 'Đã gửi')
+                <button id="{{$ls->id}}" class="btn btn-default update nhan-hang">Đã nhận hàng</button>
+            @endif
             <a class="btn btn-default back" href="{{ url('member/lichsu') }}">Quay Về</a>
         </div>
         @endforeach
     </div>
 
 </div>
+    
+@endsection
+@section('script')
+<script>
+    $(document).ready(function(){
+        $('button.nhan-hang').click(function(){
+            var id = $(this).attr('id');
+            console.log(id);
+            var xacnhan = confirm('bạn đã nhận hàng?');
+            if( xacnhan == true){
+                $.ajax({
+                    method: "POST",
+                    url: "/member/nhanhang",
+                    data: {
+                            _token: '{{csrf_token()}}',
+                            id_ls: id,                               
+                        },
+                    success: function (data){
+                            alert(data);
+                        }    
+                });
+            }  
+            
+        });
+
+    })
+</script>
     
 @endsection

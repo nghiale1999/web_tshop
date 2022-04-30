@@ -134,7 +134,7 @@ class MemberController extends Controller
             $user->email = $request->email;
             if($user->save()){
                 $title = 'đổi mật khẩu';
-                $content = 'doi mat khau vui long click vao link: http://127.0.0.1:8000/member/reset-password/'.$random.'';;
+                $content = 'doi mat khau vui long click vao link: http://127.0.0.1:8000/member/reset-password/'.$random.'';
                 $mailfrom = 'lenghiamailtest@gmail.com';
                 $mailname = 'nghiale';
                 $mail = [

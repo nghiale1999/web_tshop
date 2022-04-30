@@ -262,22 +262,24 @@
    
                $('a.add-to-cart').click(function(){
                    var id = $(this).attr('id');
-                   
-                   var xacnhan = confirm('thêm sản phẩm vào giỏ hàng ?')
-                   if( xacnhan==true ){
-                
-                        $.ajax({
-                            method: "POST",
-                            url: '/member/themgiohang',
-                            data:{
-                                    _token: '{{csrf_token()}}',
-                                    id_sp: id,                               
-                                    },
-                            success:function(data){
-                                alert(data);
-    
-                            }    
-                        });
+                   if({{Auth::check() && Auth::user()->capdo == 0}}){
+                        var xacnhan = confirm('thêm sản phẩm vào giỏ hàng ?')
+                        if( xacnhan==true ){
+                    
+                            $.ajax({
+                                method: "POST",
+                                url: '/member/themgiohang',
+                                data:{
+                                        _token: '{{csrf_token()}}',
+                                        id_sp: id,                               
+                                        },
+                                success:function(data){
+                                    alert(data);
+        
+                                }    
+                            });
+                        }
+                        
                    }
                    
                })

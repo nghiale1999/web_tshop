@@ -16,11 +16,13 @@
                 <tr>
                     <td>{{$ls->id}}</td>
                     <td>{{$ls->created_at}}</td>
-                    <td><span class="success">Đã giao</span></td>
+                    <td><span class="success">{{$ls->trangthai}}</span></td>
                     <td><a href="{{ url('member/chitiet-lichsu/'.$ls->id)}}" class="view">Chi Tiết</a></td>
                 </tr>
+                
             @endforeach
-            
+          
+        
             
         </tbody>
     </table>
